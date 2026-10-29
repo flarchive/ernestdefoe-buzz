@@ -1,0 +1,262 @@
+// Buzz: the live activity toast / ticker. Colours come from the forum's own
+// variables, so it follows the theme, light and dark, without its own palette.
+
+.Buzz {
+  position: fixed;
+  z-index: 1025; // core: composer 1020 < this < dropdowns 1030, modal backdrop 1040
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-color);
+  pointer-events: auto;
+  transition: opacity 0.2s, transform 0.25s ease;
+  opacity: 0;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// Off-canvas phone drawer or a modal open: out of the way.
+body:has(#app.drawerOpen) .Buzz,
+body.modal-open .Buzz {
+  display: none;
+}
+
+.Buzz-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.Buzz-avatarLink {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.Buzz-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--buzz-avatar, var(--control-bg));
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.Buzz-icon {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.Buzz-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+a.Buzz-text:hover,
+a.Buzz-text:focus-visible {
+  text-decoration: underline;
+}
+
+.Buzz-user {
+  font-weight: 700;
+}
+
+a.Buzz-user:hover {
+  text-decoration: underline;
+}
+
+.Buzz-more {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--control-bg);
+  color: var(--control-color);
+  white-space: nowrap;
+}
+
+.Buzz-close {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted-color);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--control-bg);
+    color: var(--text-color);
+  }
+}
+
+// ── Bottom toast ──────────────────────────────────────────────────────────
+
+.Buzz--toast {
+  bottom: ~"calc(var(--buzz-y, 16px) + var(--buzz-lift, 0px) + env(safe-area-inset-bottom, 0px))";
+  width: ~"min(360px, calc(100vw - 2 * var(--buzz-x, 16px)))";
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px 10px 12px;
+  background: var(--body-bg);
+  border: 1px solid var(--control-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  transform: translateY(12px);
+  transition: opacity 0.2s, transform 0.25s ease, bottom 0.2s;
+
+  .Buzz-card {
+    flex: 1;
+  }
+}
+
+.Buzz--left {
+  left: var(--buzz-x, 16px);
+}
+
+.Buzz--right {
+  right: var(--buzz-x, 16px);
+}
+
+// Parley's docked online list takes the right 300px on wide screens.
+@media (min-width: 1200px) {
+  body.Parley--docked .Buzz--right {
+    right: ~"calc(var(--buzz-x, 16px) + 300px)";
+  }
+}
+
+// ── Top ticker ────────────────────────────────────────────────────────────
+
+.Buzz--ticker {
+  top: var(--buzz-top, 0px);
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px 0 16px;
+  background: var(--body-bg);
+  border-bottom: 1px solid var(--control-bg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transform: translateY(-8px);
+  z-index: 999; // under the header's own menus
+
+  > .Buzz-card {
+    flex: 1;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .Buzz-avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .Buzz-text {
+    -webkit-line-clamp: 1;
+    white-space: nowrap;
+    display: block;
+  }
+}
+
+.Buzz-track {
+  flex: 1;
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  min-width: max-content;
+
+  &.is-running {
+    animation: buzz-scroll linear 1 forwards;
+  }
+
+  .Buzz-card {
+    flex: none;
+  }
+
+  .Buzz-text {
+    overflow: visible;
+  }
+}
+
+.Buzz--ticker .Buzz-close {
+  position: relative;
+  z-index: 1;
+  background: var(--body-bg);
+  box-shadow: -12px 0 12px var(--body-bg);
+}
+
+.Buzz.is-paused .Buzz-track {
+  animation-play-state: paused;
+}
+
+@keyframes buzz-scroll {
+  from {
+    transform: translateX(var(--buzz-from, 100vw));
+  }
+  to {
+    transform: translateX(var(--buzz-to, -100%));
+  }
+}
+
+@media (max-width: 767px) {
+  .Buzz--toast {
+    left: var(--buzz-x, 12px);
+    right: var(--buzz-x, 12px);
+    width: auto;
+  }
+
+  .Buzz--ticker {
+    height: 36px;
+    padding-left: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Buzz,
+  .Buzz--toast,
+  .Buzz--ticker {
+    transition: none;
+    transform: none;
+  }
+}
+
+// Settings page: the switches sit like core's.
+.Settings-buzz .helpText {
+  margin: -4px 0 12px;
+}
