@@ -2,20 +2,13 @@
 
 > **Read-only archive of released versions of ernestdefoe/buzz.** Not for installation: use [Packagist](https://packagist.org/packages/ernestdefoe/buzz) or the [upstream repository](https://github.com/ernestdefoe/buzz).
 
-**8** versions archived · Latest: [`1.1.5`](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.5) · License: `MIT` · Flarum: `^2.0`
+**0** versions archived · Latest: [`1.1.6`](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.6) · License: `MIT` · Flarum: `^2.0`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| `1.0.0` | 2026-10-29 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.0.0) |
-| `1.0.1` | 2026-10-29 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.0.1) |
-| `1.1.0` | 2026-10-29 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.0) |
-| `1.1.2` | 2026-10-30 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.2) |
-| `1.1.3` | 2026-11-15 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.3) |
-| `1.1.4` | 2026-11-15 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.4) |
-| `v1.1.1` | 2026-10-29 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.1) |
-| `1.1.5` | 2026-11-16 | `^2.0` | [Browse](https://github.com/flarchive/ernestdefoe-buzz/tree/archive/v1.1.5) |
+| — | — | — | — |
 
 Catalog entry: [packages/ernestdefoe-buzz.json](https://github.com/flarchive/archive-index/blob/main/packages/ernestdefoe-buzz.json)
 
